@@ -1,14 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri + React + Typescript</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/vite.svg"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Tauri + React + TypeScript</title>
+    <style>
+      /* 将样式移到head中，遵循最佳实践 */
+      .titlebar {
+        height: 30px;
+        background: #329ea3;
+        user-select: none;
+        display: flex;
+        justify-content: flex-end;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000; /* 确保标题栏在最上层 */
+        -webkit-app-region: drag; /* 允许拖动整个标题栏区域 */
+      }
+      .titlebar-button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        -webkit-app-region: no-drag; /* 按钮区域不可拖动 */
+      }
+      .titlebar-button:hover {
+        background: #5bbec3;
+      }
+      /* 为body添加padding以避免内容被标题栏遮挡 */
+      body {
+        margin: 0;
+        padding-top: 30px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      }
+      /* 确保根元素正确显示 */
+      #root {
+        height: calc(100vh - 30px);
+      }
+    </style>
   </head>
 
   <body>
+    <!-- 标题栏放在最前面，确保正确渲染 -->
+    <div
+      data-tauri-drag-region
+      class="titlebar"
+    >
+      <div
+        class="titlebar-button"
+        id="titlebar-minimize"
+      >
+        <img
+          src="https://api.iconify.design/mdi:window-minimize.svg"
+          alt="minimize"
+        />
+      </div>
+      <div
+        class="titlebar-button"
+        id="titlebar-maximize"
+      >
+        <img
+          src="https://api.iconify.design/mdi:window-maximize.svg"
+          alt="maximize"
+        />
+      </div>
+      <div
+        class="titlebar-button"
+        id="titlebar-close"
+      >
+        <img
+          src="https://api.iconify.design/mdi:close.svg"
+          alt="close"
+        />
+      </div>
+    </div>
+
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+
+    <script
+      type="module"
+      src="/src/main.tsx"
+    ></script>
   </body>
 </html>
